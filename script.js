@@ -1,3 +1,18 @@
+// Hero header transformation on scroll
+document.addEventListener('DOMContentLoaded', function() {
+    window.addEventListener('scroll', function() {
+        const heroHeader = document.querySelector('.hero-header');
+        if (window.scrollY > 100) {
+            heroHeader.classList.add('scrolled');
+        } else {
+            heroHeader.classList.remove('scrolled');
+        }
+    });
+});
+
+
+
+
 // Smooth scrolling for navigation links
 document.querySelectorAll('nav a').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
