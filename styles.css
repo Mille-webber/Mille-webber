@@ -286,6 +286,95 @@ footer {
     text-align: center;
 }
 
+/* Timeline Styles */
+.timeline {
+    position: relative;
+    margin-top: 40px;
+    padding-left: 20px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #4a6de5;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 50px;
+    padding-left: 30px;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -9px;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #4a6de5;
+    border-radius: 50%;
+}
+
+.timeline-date {
+    margin-bottom: 10px;
+}
+
+.timeline-date span {
+    background-color: #4a6de5;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.timeline-content h3 {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+
+.timeline-content h4 {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Responsive Timeline */
+@media (max-width: 768px) {
+    .timeline {
+        padding-left: 0;
+    }
+    
+    .timeline::before {
+        left: 20px;
+    }
+    
+    .timeline-item {
+        padding-left: 50px;
+    }
+    
+    .timeline-dot {
+        left: 11px;
+    }
+}
+
+/* Updated Navigation for new sections */
+nav ul li a[href="#experience"],
+nav ul li a[href="#education"] {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 15px;
+    transition: all 0.3s ease;
+}
+
+nav ul li a[href="#experience"]:hover,
+nav ul li a[href="#education"]:hover {
+    background-color: #4a6de5;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .about-content, .contact-content, .skills-container {
