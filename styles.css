@@ -286,10 +286,67 @@ footer {
     text-align: center;
 }
 
+/* CV Sections Layout */
+.cv-flex-container {
+    display: flex;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.cv-section {
+    flex: 1;
+    min-width: 0; /* Prevents flex items from overflowing */
+}
+
+/* Collapsible Functionality */
+.collapsible-header {
+    cursor: pointer;
+    position: relative;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.collapsible-header::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 50px;
+    height: 3px;
+    background-color: #4a6de5;
+    transition: width 0.3s ease;
+}
+
+.collapsible-header:hover::after {
+    width: 100px;
+}
+
+.toggle-icon {
+    font-size: 24px;
+    color: #4a6de5;
+    transition: transform 0.3s ease;
+}
+
+.collapsible-header.active .toggle-icon {
+    transform: rotate(45deg);
+}
+
+.collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.collapsible-content.open {
+    max-height: 1500px; /* Arbitrary large height to accommodate content */
+}
+
 /* Timeline Styles */
 .timeline {
     position: relative;
-    margin-top: 40px;
     padding-left: 20px;
 }
 
@@ -341,8 +398,12 @@ footer {
     margin-bottom: 15px;
 }
 
-/* Responsive Timeline */
+/* Responsive Design */
 @media (max-width: 768px) {
+    .cv-flex-container {
+        flex-direction: column;
+    }
+    
     .timeline {
         padding-left: 0;
     }
@@ -360,9 +421,8 @@ footer {
     }
 }
 
-/* Updated Navigation for new sections */
-nav ul li a[href="#experience"],
-nav ul li a[href="#education"] {
+/* Navigation Updates */
+nav ul li a[href="#cv-sections"] {
     display: block;
     color: white;
     text-decoration: none;
@@ -370,8 +430,7 @@ nav ul li a[href="#education"] {
     transition: all 0.3s ease;
 }
 
-nav ul li a[href="#experience"]:hover,
-nav ul li a[href="#education"]:hover {
+nav ul li a[href="#cv-sections"]:hover {
     background-color: #4a6de5;
 }
 
