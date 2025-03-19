@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website UI Redesign - Portfolio Project</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;500;700&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+      color: #343a40;
+      line-height: 1.6;
+    }
+    
+    header {
+      background-color: #212529;
+      padding: 1.5rem 2rem;
+      position: fixed;
+      width: 100%;
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    
+    header.scrolled {
+      padding: 0.8rem 2rem;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+    
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: #fff;
+      text-decoration: none;
+      position: relative;
+    }
+    
+    .logo::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background-color: #4a6de5;
+      transition: width 0.3s ease;
+    }
+    
+    .logo:hover::after {
+      width: 100%;
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      color: #adb5bd;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    
+    .nav-links a:hover {
+      color: #4a6de5;
+    }
+    
+    main {
+      padding-top: 100px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-bottom: 5rem;
+    }
+    
+    .project-hero {
+      position: relative;
+      height: 60vh;
+      background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/api/placeholder/1200/600');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem;
+      color: white;
+      border-radius: 12px;
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+    
+    .project-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+      z-index: 1;
+    }
+    
+    .project-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+    }
+    
+    .project-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .project-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 80px;
+      height: 4px;
+      background-color: #4a6de5;
+    }
+    
+    .project-subtitle {
+      font-size: 1.2rem;
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+      max-width: 600px;
+    }
+    
+    .project-meta {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1.5rem;
+    }
+    
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .meta-label {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: #adb5bd;
+    }
+    
+    .meta-value {
+      font-weight: 500;
+    }
+    
+    .section {
+      margin-bottom: 4rem;
+    }
+    
+    .section-title {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: #4a6de5;
+    }
+    
+    .overview {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #495057;
+      max-width: 800px;
+    }
+    
+    .before-after-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .comparison-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .comparison-item img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.5s ease;
+    }
+    
+    .comparison-label {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background-color: rgba(0,0,0,0.7);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+    
+    .compare-overlay {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0,0,0,0.7);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .comparison-item:hover .compare-overlay {
+      opacity: 1;
+    }
+    
+    .compare-button {
+      background-color: #4a6de5;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .compare-button:hover {
+      background-color: #3a5ad5;
+      transform: scale(1.05);
+    }
+    
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-item-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      padding: 1.5rem;
+      color: white;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-item-overlay {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    
+    .gallery-item-title {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .gallery-item-desc {
+      font-size: 0.9rem;
+      font-weight: 300;
+    }
+    
+    .process {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    
+    .process-step {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .process-step-reverse {
+      grid-template-columns: 2fr 1fr;
+    }
+    
+    .process-step-img {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    .process-step-img img {
+      width: 100%;
+      height: auto;
+      transition: transform 0.5s ease;
+    }
+    
+    .process-step:hover .process-step-img img {
+      transform: scale(1.05);
+    }
+    
+    .process-step-content h3 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .process-step-content h3::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: #4a6de5;
+    }
+    
+    .process-step-content p {
+      color: #495057;
+      line-height: 1.8;
+    }
+
+    .mockup-devices {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+    
+    .device-row {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+    }
+    
+    .device-mockup {
+      position: relative;
+      transition: transform 0.3s ease;
+    }
+    
+    .device-mockup:hover {
+      transform: translateY(-10px);
+    }
+    
+    .device-desktop {
+      width: 60%;
+    }
+    
+    .device-tablet {
+      width: 35%;
+    }
+    
+    .device-mobile {
+      width: 15%;
+    }
+    
+    .device-mockup img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    
+    .device-label {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: 500;
+      color: #495057;
+    }
+    
+    .results-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .result-card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    
+    .result-card:hover {
+      transform: translateY(-10px);
+    }
+    
+    .result-number {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #4a6de5;
+      margin-bottom: 1rem;
+    }
+    
+    .result-label {
+      font-size: 1.1rem;
+      color: #495057;
+    }
+    
+    .testimonial {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      position: relative;
+      margin-top: 2rem;
+    }
+    
+    .testimonial::before {
+      content: '"';
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      font-size: 5rem;
+      color: #f8f9fa;
+      font-family: 'Georgia', serif;
+      line-height: 1;
+      z-index: 0;
+    }
+    
+    .testimonial-content {
+      position: relative;
+      z-index: 1;
+      font-style: italic;
+      color: #495057;
+      margin-bottom: 1.5rem;
+    }
+    
+    .testimonial-client {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .testimonial-client-img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
+    
+    .testimonial-client-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .testimonial-client-info h4 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+    
+    .testimonial-client-info p {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+    
+    .cta {
+      background-color: #212529;
+      color: white;
+      padding: 4rem 2rem;
+      border-radius: 12px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(74,109,229,0.2), transparent);
+      z-index: 1;
+    }
+    
+    .cta-content {
+      position: relative;
+      z-index: 2;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .cta h2 {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .cta p {
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background-color: #4a6de5;
+      color: white;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: 2px solid #4a6de5;
+    }
+    
+    .cta-button:hover {
+      background-color: transparent;
+      color: #4a6de5;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(74,109,229,0.3);
+    }
+    
+    footer {
+      background-color: #212529;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    
+    footer p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: #adb5bd;
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.8);
+      z-index: 1001;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+    }
+    
+    .modal.show {
+      display: flex;
+    }
+    
+    .modal-content {
+      width: 90%;
+      max-width: 1000px;
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .close-modal {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background-color: rgba(0,0,0,0.7);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 10;
+    }
+    
+    /* Image comparison styling */
+    .img-comp-container {
+      position: relative;
+      height: 600px; /* Set this to your image height */
+      width: 100%;
+    }
+
+    .img-comp-img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .img-comp-img img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .img-comp-slider {
+      position: absolute;
+      z-index: 9;
+      cursor: ew-resize;
+      /* Set the slider appearance */
+      width: 40px;
+      height: 40px;
+      background-color: #4a6de5;
+      border-radius: 50%;
+      opacity: 0.7;
+      top: 50%;
+      transform: translateY(-50%) translateX(-50%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .img-comp-slider:hover {
+      opacity: 1;
+    }
+
+    .img-comp-slider::before, 
+    .img-comp-slider::after {
+      content: "";
+      position: absolute;
+      background-color: white;
+    }
+
+    .img-comp-slider::before {
+      /* Vertical line */
+      width: 3px;
+      height: 600px;
+      top: -280px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .img-comp-slider::after {
+      /* Arrow content */
+      content: "↔";
+      background: none;
+      color: white;
+      font-size: 20px;
+      font-weight: bold;
+    }
+    
+    .device-showcase {
+      position: relative;
+      height: 700px;
+      margin: 4rem auto;
+      display: flex;
+      justify-content: center;
+    }
+    
+    .device {
+      position: absolute;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      border: 10px solid #333;
+      background-color: white;
+      transition: all 0.5s ease;
+      overflow: hidden;
+      transform-origin: center;
+    }
+    
+    .device img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .desktop {
+      width: 700px;
+      height: 450px;
+      z-index: 3;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    
+    .tablet {
+      width: 350px;
+      height: 450px;
+      z-index: 2;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateX(-300px) scale(0.85);
+    }
+    
+    .mobile {
+      width: 180px;
+      height: 380px;
+      z-index: 1;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) translateX(350px) scale(0.7);
+      border-radius: 30px;
+    }
+    
+    .device-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .device-button {
+      padding: 0.5rem 1.5rem;
+      border: 2px solid #4a6de5;
+      background: transparent;
+      color: #4a6de5;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    .device-button:hover, .device-button.active {
+      background-color: #4a6de5;
+      color: white;
+    }
+    
+    /* Focus states for responsive showcase */
+    .desktop-focus .desktop {
+      transform: translate(-50%, -50%) scale(1);
+      z-index: 5;
+    }
+    .desktop-focus .tablet {
+      transform: translate(-50%, -50%) translateX(-400px) scale(0.6) rotate(-5deg);
+      opacity: 0.7;
+    }
+    .desktop-focus .mobile {
+      transform: translate(-50%, -50%) translateX(400px) scale(0.5) rotate(5deg);
+      opacity: 0.7;
+    }
+    
+    .tablet-focus .desktop {
+      transform: translate(-50%, -50%) translateX(400px) scale(0.6) rotate(5deg);
+      opacity: 0.7;
+      z-index: 1;
+    }
+    .tablet-focus .tablet {
+      transform: translate(-50%, -50%) scale(1);
+      z-index: 5;
+    }
+    .tablet-focus .mobile {
+      transform: translate(-50%, -50%) translateX(-400px) scale(0.6) rotate(-5deg);
+      opacity: 0.7;
+    }
+    
+    .mobile-focus .desktop {
+      transform: translate(-50%, -50%) translateX(-400px) scale(0.5) rotate(-5deg);
+      opacity: 0.7;
+      z-index: 1;
+    }
+    .mobile-focus .tablet {
+      transform: translate(-50%, -50%) translateX(400px) scale(0.6) rotate(5deg);
+      opacity: 0.7;
+      z-index: 2;
+    }
+    .mobile-focus .mobile {
+      transform: translate(-50%, -50%) scale(1.1);
+      z-index: 5;
+    }
+    
+    @media (max-width: 768px) {
+      .project-title {
+        font-size: 2.5rem;
+      }
+      
+      .project-meta {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      
+      .process-step, .process-step-reverse {
+        grid-template-columns: 1fr;
+      }
+      
+      .process-step-img {
+        order: 1;
+      }
+      
+      .process-step-content {
+        order: 2;
+      }
+      
+      .before-after-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .results-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .device-row {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .device-desktop, .device-tablet, .device-mobile {
+        width: 90%;
+      }
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate {
+      opacity: 0;
+      animation: fadeIn 0.8s forwards;
+    }
+    
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+    .delay-4 { animation-delay: 0.8s; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="index.html" class="logo">Your Name</a>
+      <div class="nav-links">
+        <a href="index.html#work">Work</a>
+        <a href="index.html#about">About</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+  
+  <main>
+    <section class="project-hero">
+      <div class="project-hero-content animate">
+        <h1 class="project-title">Company Website Redesign</h1>
+        <p class="project-subtitle">A comprehensive UI/UX overhaul that improved user engagement and modernized the brand's digital presence</p>
+        <div class="project-meta">
+          <div class="meta-item">
+            <span class="meta-label">Client</span>
+            <span class="meta-value">Company Name</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Duration</span>
+            <span class="meta-value">8 weeks</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Role</span>
+            <span class="meta-value">UI/UX Designer</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">Year</span>
+            <span class="meta-value">2024</span>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section animate delay-1">
+      <h2 class="section-title">Before & After</h2>
+      <div class="before-after-container">
+        <div class="comparison-item">
+          <span class="comparison-label">Before</span>
+          <img src="/api/placeholder/1000/600?text=Old+Website+Design&bg=e9e9e9&fg=777777" alt="Website Before Redesign">
+          <div class="compare-overlay">
+            <button class="compare-button" data-compare-id="homepage">Compare</button>
+          </div>
+        </div>
+        <div class="comparison-item">
+          <span class="comparison-label">After</span>
+          <img src="/api/placeholder/1000/600?text=New+Website+Design&bg=4a6de5&fg=ffffff" alt="Website After Redesign">
+          <div class="compare-overlay">
+            <button class="compare-button" data-compare-id="homepage">Compare</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section animate delay-2">
+      <h2 class="section-title">Key Pages Redesigned</h2>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="/api/placeholder/600/400?text=Homepage+Redesign&bg=f5f5f5&fg=4a6de5" alt="Homepage Redesign">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">Homepage</h3>
+            <p class="gallery-item-desc">Completely restructured hero section and streamlined product showcases</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="/api/placeholder/600/400?text=Product+Page&bg=f0f7ff&fg=4a6de5" alt="Product Page Redesign">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">Product Pages</h3>
+            <p class="gallery-item-desc">Enhanced product visualization and improved information hierarchy</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="/api/placeholder/600/400?text=About+Us+Page&bg=f5f5f5&fg=4a6de5" alt="About Us Page Redesign">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">About Us</h3>
+            <p class="gallery-item-desc">Created a more compelling company story with engaging visuals</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="/api/placeholder/600/400?text=Contact+Page&bg=f0f7ff&fg=4a6de5" alt="Contact Page Redesign">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">Contact Page</h3>
+            <p class="gallery-item-desc">Simplified contact form and added multiple contact options</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section animate delay-3">
+      <h2 class="section-title">Design Process</h2>
+      <div class="process">
+        <div class="process-step">
+          <div class="process-step-img">
+            <img src="/api/placeholder/600/400?text=Research+&+Analysis&bg=f8f9fa&fg=4a6de5" alt="Research and Analysis">
+          </div>
+          <div class="process-step-content">
+            <h3>Research & Analysis</h3>
+            <p>I began by conducting a thorough audit of the existing website, analyzing user flows, identifying pain points, and collecting feedback from customers and stakeholders. I also researched competitor websites and industry trends to identify best practices and opportunities for differentiation.</p>
+            <p>This research phase revealed that users found our navigation confusing, our product information scattered, and our mobile experience frustrating. These insights formed the foundation of my redesign strategy.</p>
+          </div>
+        </div>
+        
+        <div class="process-step">
+          <div class="process-step-img">
+            <img src="/api/placeholder/600/400?text=UI+Design+System&bg=f8f9fa&fg=4a6de5" alt="UI Design">
+          </div>
+          <div class="process-step-content">
+            <h3>UI Design & Visual Language</h3>
+            <p>I developed a refreshed visual language that maintained brand recognition while introducing a more modern, clean aesthetic. This included updating the color palette, typography system, button styles, and creating a comprehensive UI component library.</p>
+            <p>The new visual system was designed to be flexible and scalable, ensuring consistency across all pages while allowing for creative solutions to unique content requirements.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <section class="section animate delay-3">
+      <h2 class="section-title">Responsive Design</h2>
+      <p class="overview">A key focus of the redesign was to create an exceptional experience across all devices. I designed with a mobile-first approach while ensuring the desktop experience took full advantage of larger screens.</p>
+      
+      <div class="device-showcase">
+        <div class="device desktop">
+          <img src="/api/placeholder/1000/600?text=Desktop+Version&bg=ffffff&fg=4a6de5" alt="Desktop Version">
+        </div>
+        <div class="device tablet">
+          <img src="/api/placeholder/600/800?text=Tablet+Version&bg=ffffff&fg=4a6de5" alt="Tablet Version">
+        </div>
+        <div class="device mobile">
+          <img src="/api/placeholder/400/800?text=Mobile+Version&bg=ffffff&fg=4a6de5" alt="Mobile Version">
+        </div>
+      </div>
+      
+      <div class="device-controls">
+        <button class="device-button active" data-device="desktop">Desktop</button>
+        <button class="device-button" data-device="tablet">Tablet</button>
+        <button class="device-button" data-device="mobile">Mobile</button>
+      </div>
+    </section>
+    
+    <section class="section animate delay-4">
+      <h2 class="section-title">Results & Impact</h2>
+      <p class="overview">The redesigned website launched successfully and has had a significant positive impact on key business metrics and user engagement. These improvements demonstrate the value of a thoughtful, user-centered design approach.</p>
+      
+      <div class="results-container">
+        <div class="result-card">
+          <div class="result-number">+65%</div>
+          <div class="result-label">Increase in time spent on site</div>
+        </div>
+        <div class="result-card">
+          <div class="result-number">+42%</div>
+          <div class="result-label">Improvement in conversion rate</div>
+        </div>
+        <div class="result-card">
+          <div class="result-number">-30%</div>
+          <div class="result-label">Decrease in bounce rate</div>
+        </div>
+      </div>
+      
+      <div class="testimonial">
+        <p class="testimonial-content">The website redesign has completely transformed our digital presence. Not only is it visually stunning, but it has significantly improved our user engagement metrics and conversion rates. The thoughtful approach to both aesthetics and functionality has resulted in a website that truly represents our brand and serves our customers better.</p>
+        <div class="testimonial-client">
+          <div class="testimonial-client-img">
+            <img src="/api/placeholder/100/100?text=Client&bg=4a6de5&fg=ffffff" alt="Client Name">
+          </div>
+          <div class="testimonial-client-info">
+            <h4>Client Name</h4>
+            <p>Marketing Director, Company Name</p>
+          </div>
+        </div>
+      </div>
+    </section>
+      
+    <section class="section animate delay-4">
+      <h2 class="section-title">Key Learnings</h2>
+      <div class="overview">
+        <p>This project provided valuable insights and experience that have enhanced my approach to UI/UX design. Here are the key takeaways:</p>
+        
+        <div style="background-color: #f5f7ff; border-left: 4px solid #4a6de5; padding: 2rem; margin: 2rem 0; border-radius: 0 8px 8px 0;">
+          <ul style="list-style-type: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 1.5rem; display: flex; align-items: flex-start;">
+              <span style="background-color: #4a6de5; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 1rem; flex-shrink: 0;">1</span>
+              <div>
+                <h3 style="margin: 0 0 0.5rem 0; font-size: 1.2rem;">User Research is Foundational</h3>
+                <p style="margin: 0; line-height: 1.6;">Starting with thorough user research was essential for identifying pain points and opportunities that might have been missed through assumption-based design.</p>
+              </div>
+            </li>
+            <li style="margin-bottom: 1.5rem; display: flex; align-items: flex-start;">
+              <span style="background-color: #4a6de5; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 1rem; flex-shrink: 0;">2</span>
+              <div>
+                <h3 style="margin: 0 0 0.5rem 0; font-size: 1.2rem;">Mobile-First Approach Pays Off</h3>
+                <p style="margin: 0; line-height: 1.6;">Designing for mobile first forced prioritization of content and features, resulting in a cleaner, more focused experience across all devices.</p>
+              </div>
+            </li>
+            <li style="margin-bottom: 1.5rem; display: flex; align-items: flex-start;">
+              <span style="background-color: #4a6de5; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 1rem; flex-shrink: 0;">3</span>
+              <div>
+                <h3 style="margin: 0 0 0.5rem 0; font-size: 1.2rem;">Iterative Testing is Crucial</h3>
+                <p style="margin: 0; line-height: 1.6;">Regular testing throughout the design process caught issues early and validated design decisions, saving time and resources in the long run.</p>
+              </div>
+            </li>
+            <li style="display: flex; align-items: flex-start;">
+              <span style="background-color: #4a6de5; color: white; width: 30px; height: 30px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-right: 1rem; flex-shrink: 0;">4</span>
+              <div>
+                <h3 style="margin: 0 0 0.5rem 0; font-size: 1.2rem;">Design Systems Drive Consistency</h3>
+                <p style="margin: 0; line-height: 1.6;">Creating a comprehensive design system early in the process ensured visual and functional consistency throughout the site, and will streamline future updates.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <footer>
+      <p>&copy; 2025 Your Name. All rights reserved.</p>
+    </footer>
+  </main>
+  
+  <!-- Comparison Modal -->
+  <div class="modal" id="comparison-modal">
+    <button class="close-modal">&times;</button>
+    <div class="modal-content">
+      <div class="img-comp-container">
+        <div class="img-comp-img">
+          <img src="/api/placeholder/1000/600?text=After+Design&bg=4a6de5&fg=ffffff" alt="After">
+        </div>
+        <div class="img-comp-img">
+          <img src="/api/placeholder/1000/600?text=Before+Design&bg=e9e9e9&fg=777777" alt="Before">
+        </div>
+        <div class="img-comp-slider"></div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Animate elements on scroll
+    const animateElements = document.querySelectorAll('.animate');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = 1;
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    animateElements.forEach(element => {
+      observer.observe(element);
+    });
+    
+    // Header scroll effect
+    const header = document.querySelector('header');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+    
+    // Smooth scroll for the down arrow
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+      scrollIndicator.addEventListener('click', () => {
+        const firstSection = document.querySelector('.section');
+        if (firstSection) {
+          firstSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
+    
+    // Comparison functionality
+    const modal = document.getElementById('comparison-modal');
+    const closeBtn = document.querySelector('.close-modal');
+    const compareButtons = document.querySelectorAll('.compare-button');
+    
+    compareButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        modal.classList.add('show');
+        // Initialize the comparison when the modal opens
+        initComparisons();
+      });
+    });
+    
+    closeBtn.addEventListener('click', () => {
+      modal.classList.remove('show');
+    });
+    
+    // Click outside to close
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('show');
+      }
+    });
+    
+    function initComparisons() {
+      /* Find all elements with the class "img-comp-container": */
+      const comparisons = document.getElementsByClassName("img-comp-container");
+      
+      for (let i = 0; i < comparisons.length; i++) {
+        compareImages(comparisons[i]);
+      }
+      
+      function compareImages(container) {
+        let slider, img, width, height;
+        /* Get the width and height of the container: */
+        width = container.offsetWidth;
+        height = container.offsetHeight;
+        
+        /* Set the width of the "before" image to 50%: */
+        img = container.getElementsByClassName("img-comp-img")[1];
+        img.style.width = "50%";
+        
+        /* Position the slider in the middle: */
+        slider = container.getElementsByClassName("img-comp-slider")[0];
+        slider.style.left = (width / 2) + "px";
+        
+        /* Execute a function when the mouse button is pressed: */
+        slider.addEventListener("mousedown", slideReady);
+        /* Execute a function when the touch start event occurs (on mobile): */
+        slider.addEventListener("touchstart", slideReady);
+        
+        /* Execute a function when the mouse button is released: */
+        window.addEventListener("mouseup", slideFinish);
+        /* Execute a function when the touch end event occurs (on mobile): */
+        window.addEventListener("touchend", slideFinish);
+        
+        function slideReady(e) {
+          /* Prevent any other actions that may occur when moving over the image: */
+          e.preventDefault();
+          /* The slider is now active and ready to move: */
+          document.addEventListener("mousemove", slideMove);
+          document.addEventListener("touchmove", slideMove);
+        }
+        
+        function slideFinish() {
+          /* The slider is no longer active: */
+          document.removeEventListener("mousemove", slideMove);
+          document.removeEventListener("touchmove", slideMove);
+        }
+        
+        function slideMove(e) {
+          /* Get the cursor's x position: */
+          let pos = getCursorPos(e);
+          /* Prevent the slider from being positioned outside the image: */
+          if (pos < 0) pos = 0;
+          if (pos > width) pos = width;
+          /* Resize the "before" image: */
+          img.style.width = pos + "px";
+          /* Position the slider: */
+          slider.style.left = pos + "px";
+        }
+        
+        function getCursorPos(e) {
+          let a, x = 0;
+          e = e || window.event;
+          /* Get the x positions of the image: */
+          a = container.getBoundingClientRect();
+          /* Calculate the cursor's x coordinate, relative to the image: */
+          x = e.pageX - a.left;
+          /* Consider any page scrolling: */
+          x = x - window.pageXOffset;
+          return x;
+        }
+      }
+    }
+    
+    // Responsive Device Showcase Controls
+    const deviceButtons = document.querySelectorAll('.device-button');
+    const deviceShowcase = document.querySelector('.device-showcase');
+    
+    deviceButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        // Remove active class from all buttons
+        deviceButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Add active class to clicked button
+        button.classList.add('active');
+        
+        // Get device type
+        const deviceType = button.getAttribute('data-device');
+        
+        // Remove all focus classes
+        deviceShowcase.classList.remove('desktop-focus', 'tablet-focus', 'mobile-focus');
+        
+        // Add appropriate focus class
+        deviceShowcase.classList.add(`${deviceType}-focus`);
+      });
+    });
+    
+    // Initially set to desktop focus
+    deviceShowcase.classList.add('desktop-focus');
+    
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', initComparisons);
+  </script>
+</body>
+</html>
