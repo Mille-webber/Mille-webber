@@ -356,7 +356,7 @@ header.scrolled .nav-links a::after {
 /* Skills Section */
 .skills {
     padding: 8rem 0;
-    background-color: rgba(213, 254, 0, 0.5); /* #d5fe00 at 50% opacity */
+    background-color: #a2c200); /* #d5fe00 at 50% opacity */
     position: relative;
     overflow: hidden;
 }
