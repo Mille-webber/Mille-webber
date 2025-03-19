@@ -31,6 +31,16 @@ const observer = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             entry.target.style.opacity = '1';
             entry.target.style.transform = 'translateY(0)';
+            
+            // Animate floating elements when skills section is in view
+            if (entry.target.classList.contains('skills-container')) {
+                const floatingElements = document.querySelectorAll('.floating-element');
+                floatingElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('visible');
+                    }, index * 300);
+                });
+            }
         }
     });
 }, { threshold: 0.1 });
