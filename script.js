@@ -50,3 +50,32 @@ function revealOnScroll() {
 document.addEventListener('DOMContentLoaded', function() {
     document.body.style.opacity = '1';
 });
+
+
+// JavaScript for Collapsible CV Sections
+document.addEventListener('DOMContentLoaded', function() {
+    // Get all collapsible headers
+    const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
+    
+    // Add click event to each header
+    collapsibleHeaders.forEach(header => {
+        // Set initial state - first one open, others closed
+        const content = header.nextElementSibling;
+        
+        // If it's the first header in its section, open it by default
+        if (header === header.parentElement.querySelector('.collapsible-header')) {
+            header.classList.add('active');
+            content.classList.add('open');
+        }
+        
+        // Add click event
+        header.addEventListener('click', function() {
+            // Toggle active class on header
+            this.classList.toggle('active');
+            
+            // Toggle open class on content
+            const content = this.nextElementSibling;
+            content.classList.toggle('open');
+        });
+    });
+});
