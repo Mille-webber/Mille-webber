@@ -1,96 +1,54 @@
-// Hero header transformation on scroll
-document.addEventListener('DOMContentLoaded', function() {
-    window.addEventListener('scroll', function() {
-        const heroHeader = document.querySelector('.hero-header');
-        if (window.scrollY > 100) {
-            heroHeader.classList.add('scrolled');
-        } else {
-            heroHeader.classList.remove('scrolled');
+// Smooth scrolling for navigation links
+document.querySelectorAll('header a, .cta-btn, .footer-nav a').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        if (this.getAttribute('href').startsWith('#')) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            window.scrollTo({
+                top: targetElement.offsetTop - 70,
+                behavior: 'smooth'
+            });
         }
     });
 });
 
-
-
-
-// Smooth scrolling for navigation links
-document.querySelectorAll('nav a').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        window.scrollTo({
-            top: targetElement.offsetTop - 70,
-            behavior: 'smooth'
-        });
-    });
+// Header scroll effect
+window.addEventListener('scroll', function() {
+    const header = document.querySelector('header');
+    if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+    } else {
+        header.classList.remove('scrolled');
+    }
 });
 
-// Form submission event (for demonstration)
-const contactForm = document.querySelector('.contact-form');
+// Add animations as elements come into view
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, { threshold: 0.1 });
+
+// Apply animations to section elements
+document.querySelectorAll('.section-title, .project-card, .about-content, .skills-container, .skills-intro, .skill-card, .contact-info, .contact-form, .footer-nav').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+});
+
+// Add form submission handler
+const contactForm = document.getElementById('contact-form');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        // In a real scenario, you would send the form data to a server
-        // For now, we'll just show an alert
         alert('Thank you for your message! This is a demonstration as the form is not connected to a server.');
-        
-        // Reset the form
         this.reset();
     });
 }
-
-// Add a simple animation to reveal elements as they scroll into view
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', revealOnScroll);
-
-function revealOnScroll() {
-    const sections = document.querySelectorAll('.section');
-    
-    sections.forEach(section => {
-        const sectionTop = section.getBoundingClientRect().top;
-        const windowHeight = window.innerHeight;
-        
-        if (sectionTop < windowHeight - 100) {
-            section.style.opacity = '1';
-            section.style.transform = 'translateY(0)';
-        }
-    });
-}
-
-// Initialize the page with a fade-in effect
-document.addEventListener('DOMContentLoaded', function() {
-    document.body.style.opacity = '1';
-});
-
-
-// JavaScript for Collapsible CV Sections
-document.addEventListener('DOMContentLoaded', function() {
-    // Get all collapsible headers
-    const collapsibleHeaders = document.querySelectorAll('.collapsible-header');
-    
-    // Add click event to each header
-    collapsibleHeaders.forEach(header => {
-        // Set initial state - first one open, others closed
-        const content = header.nextElementSibling;
-        
-        // If it's the first header in its section, open it by default
-        if (header === header.parentElement.querySelector('.collapsible-header')) {
-            header.classList.add('active');
-            content.classList.add('open');
-        }
-        
-        // Add click event
-        header.addEventListener('click', function() {
-            // Toggle active class on header
-            this.classList.toggle('active');
-            
-            // Toggle open class on content
-            const content = this.nextElementSibling;
-            content.classList.toggle('open');
-        });
-    });
-});
