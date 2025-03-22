@@ -52,7 +52,7 @@
             top: 0;
             z-index: 1000;
             padding: 1rem 0;
-            background-color: #ffffff;
+            background-color: var(--lavender);
             transition: all 0.3s ease;
         }
 
@@ -158,42 +158,75 @@
             margin-bottom: 0;
         }
 
-        /* Image Collage */
+        /* Dual Image Collage */
         .image-collage {
             position: relative;
             height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .collage-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .collage-images {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            position: relative;
+            height: 100%;
+        }
+
+        .collage-column {
+            position: relative;
+            height: 100%;
         }
 
         .collage-image {
             position: absolute;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s ease;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             opacity: 0;
             transform: scale(0.95);
+            transition: all 0.5s ease;
         }
-        
+
         .collage-image.active {
             opacity: 1;
             transform: scale(1);
             z-index: 10;
         }
-        
-        .collage-image:nth-child(1) {
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.95);
-            z-index: 5;
-        }
-        
-        .collage-image:nth-child(1).active {
-            transform: translate(-50%, -50%) scale(1);
-        }
-        
+
         .collage-image img {
-            height: 450px;
-            width: auto;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
             border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Left column images - slightly offset upward */
+        .collage-column:first-child .collage-image {
+            transform: translateY(-10px) scale(0.95);
+        }
+
+        .collage-column:first-child .collage-image.active {
+            transform: translateY(-10px) scale(1);
+        }
+
+        /* Right column images - slightly offset downward */
+        .collage-column:last-child .collage-image {
+            transform: translateY(10px) scale(0.95);
+        }
+
+        .collage-column:last-child .collage-image.active {
+            transform: translateY(10px) scale(1);
         }
 
         /* Decorative elements */
@@ -220,6 +253,18 @@
             background-color: var(--white);
             border-radius: 50%;
             opacity: 0.3;
+        }
+
+        .decoration-dot-grid {
+            position: absolute;
+            bottom: -20px;
+            right: -30px;
+            width: 80px;
+            height: 80px;
+            background-image: radial-gradient(var(--dark) 2px, transparent 2px);
+            background-size: 10px 10px;
+            opacity: 0.2;
+            z-index: 0;
         }
 
         /* Section Styles */
@@ -567,8 +612,21 @@
                 margin-top: 2rem;
             }
 
-            .collage-image img {
-                height: 350px;
+            .collage-images {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .collage-column:first-child {
+                display: none;
+            }
+
+            .collage-column:last-child .collage-image {
+                transform: translateY(0) scale(0.95);
+            }
+
+            .collage-column:last-child .collage-image.active {
+                transform: translateY(0) scale(1);
             }
 
             nav ul {
@@ -656,23 +714,34 @@
                         </div>
                     </div>
                     <div class="image-collage">
-                        <!-- Collage images -->
-                        <div class="collage-image" id="collageImage1">
-                            <img src="Frame1.png" alt="Book campaign sample 1">
+                        <div class="collage-container">
+                            <div class="collage-images">
+                                <!-- Left column images -->
+                                <div class="collage-column">
+                                    <div class="collage-image" id="leftImage1">
+                                        <img src="/api/placeholder/600/750" alt="Book campaign sample 1">
+                                    </div>
+                                    <div class="collage-image" id="leftImage2">
+                                        <img src="/api/placeholder/600/750" alt="Book campaign sample 2">
+                                    </div>
+                                </div>
+                                
+                                <!-- Right column images -->
+                                <div class="collage-column">
+                                    <div class="collage-image" id="rightImage1">
+                                        <img src="/api/placeholder/600/750" alt="Book campaign sample 3">
+                                    </div>
+                                    <div class="collage-image" id="rightImage2">
+                                        <img src="/api/placeholder/600/750" alt="Book campaign sample 4">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Decorative elements -->
+                            <div class="decoration-circle decoration-yellow"></div>
+                            <div class="decoration-circle decoration-white"></div>
+                            <div class="decoration-dot-grid"></div>
                         </div>
-                        <div class="collage-image" id="collageImage2">
-                            <img src="Frame2.png" alt="Book campaign sample 2">
-                        </div>
-                        <div class="collage-image" id="collageImage3">
-                            <img src="Frame1.png" alt="Book campaign sample 3">
-                        </div>
-                        <div class="collage-image" id="collageImage4">
-                            <img src="Frame2.png" alt="Book campaign sample 4">
-                        </div>
-                        
-                        <!-- Decorative elements -->
-                        <div class="decoration-circle decoration-yellow"></div>
-                        <div class="decoration-circle decoration-white"></div>
                     </div>
                 </div>
             </div>
@@ -929,27 +998,45 @@
             }
         });
 
-        // Image collage rotation
-        const collageImages = [
-            document.getElementById('collageImage1'),
-            document.getElementById('collageImage2'),
-            document.getElementById('collageImage3'),
-            document.getElementById('collageImage4')
+        // Dual image collage rotation
+        const leftImages = [
+            document.getElementById('leftImage1'),
+            document.getElementById('leftImage2')
         ];
         
-        let activeImageIndex = 0;
-        collageImages[activeImageIndex].classList.add('active');
+        const rightImages = [
+            document.getElementById('rightImage1'),
+            document.getElementById('rightImage2')
+        ];
         
-        function rotateCollageImages() {
-            collageImages[activeImageIndex].classList.remove('active');
-            activeImageIndex = (activeImageIndex + 1) % collageImages.length;
-            collageImages[activeImageIndex].classList.add('active');
+        let activeLeftIndex = 0;
+        let activeRightIndex = 0;
+        
+        // Initialize the first images
+        leftImages[activeLeftIndex].classList.add('active');
+        rightImages[activeRightIndex].classList.add('active');
+        
+        // Function to rotate left column images
+        function rotateLeftImages() {
+            leftImages[activeLeftIndex].classList.remove('active');
+            activeLeftIndex = (activeLeftIndex + 1) % leftImages.length;
+            leftImages[activeLeftIndex].classList.add('active');
         }
         
-        setInterval(rotateCollageImages, 3000);
-
-        // Initialize the first image
-        collageImages[0].classList.add('active');
+        // Function to rotate right column images
+        function rotateRightImages() {
+            rightImages[activeRightIndex].classList.remove('active');
+            activeRightIndex = (activeRightIndex + 1) % rightImages.length;
+            rightImages[activeRightIndex].classList.add('active');
+        }
+        
+        // Set interval for left column - every 4 seconds
+        setInterval(rotateLeftImages, 4000);
+        
+        // Set interval for right column - every 5 seconds (staggered timing)
+        setTimeout(() => {
+            setInterval(rotateRightImages, 4000);
+        }, 2000); // Delay start by 2 seconds for staggered effect
     </script>
 </body>
 </html>
