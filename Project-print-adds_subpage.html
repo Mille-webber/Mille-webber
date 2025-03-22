@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Campaign Print Ads | Mille Bruun Hansen</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --lavender: #EDE4FF;
+            --dark: #212121;
+            --neon: #d5fe00;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--lavender);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Utilities */
+        .py-20 {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .py-16 {
+            padding-top: 4rem;
+            padding-bottom: 4rem;
+        }
+
+        /* Header Styles */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+            background-color: var(--lavender);
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+        }
+
+        .logo:hover {
+            color: var(--neon);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--neon);
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 8rem;
+            padding-bottom: 5rem;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 300;
+            margin-bottom: 1.5rem;
+        }
+
+        .title-accent {
+            display: block;
+            font-weight: 700;
+            color: var(--neon);
+            margin-top: 0.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            max-width: 32rem;
+            margin-bottom: 2rem;
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .meta-item h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            opacity: 0.7;
+            font-weight: 600;
+        }
+
+        .meta-item p {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        /* Image Collage */
+        .image-collage {
+            position: relative;
+            height: 500px;
+        }
+
+        .collage-image {
+            position: absolute;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: scale(0.95);
+        }
+        
+        .collage-image.active {
+            opacity: 1;
+            transform: scale(1);
+            z-index: 10;
+        }
+        
+        .collage-image:nth-child(1) {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.95);
+            z-index: 5;
+        }
+        
+        .collage-image:nth-child(1).active {
+            transform: translate(-50%, -50%) scale(1);
+        }
+        
+        .collage-image img {
+            height: 450px;
+            width: auto;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        /* Decorative elements */
+        .decoration-circle {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .decoration-yellow {
+            top: 1.5rem;
+            right: 3rem;
+            width: 6rem;
+            height: 6rem;
+            background-color: var(--neon);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .decoration-white {
+            bottom: 3rem;
+            left: 1rem;
+            width: 8rem;
+            height: 8rem;
+            background-color: var(--white);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 0;
+        }
+
+        section.bg-white {
+            background-color: var(--white);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 33%;
+            height: 4px;
+            background-color: var(--neon);
+        }
+
+        .title-underline {
+            position: relative;
+            z-index: 1;
+        }
+
+        .title-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 100%;
+            height: 1rem;
+            background-color: var(--neon);
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            background-color: var(--white);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item-image {
+            overflow: hidden;
+        }
+
+        .gallery-item-image img {
+            width: 100%;
+            height: 16rem;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-item-image img {
+            transform: scale(1.1);
+        }
+
+        .gallery-item-content {
+            padding: 1.5rem;
+        }
+
+        .gallery-item-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-item-content p {
+            font-size: 0.875rem;
+            opacity: 0.7;
+        }
+
+        /* Process Section */
+        .process-item {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 4rem;
+        }
+
+        @media (min-width: 768px) {
+            .process-item {
+                flex-direction: row;
+                gap: 2rem;
+                align-items: center;
+            }
+
+            .process-item:nth-child(even) {
+                flex-direction: row-reverse;
+            }
+        }
+
+        .process-image {
+            flex: 1;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .process-image {
+                margin-bottom: 0;
+            }
+        }
+
+        .process-decoration {
+            position: absolute;
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--neon);
+            opacity: 0.5;
+            z-index: 0;
+        }
+
+        .process-decoration-1 {
+            top: -0.5rem;
+            left: -0.5rem;
+        }
+
+        .process-decoration-2 {
+            bottom: -0.5rem;
+            right: -0.5rem;
+        }
+
+        .process-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .process-content {
+            flex: 1;
+        }
+
+        .process-number {
+            display: inline-block;
+            background-color: var(--neon);
+            color: var(--dark);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .process-content h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .process-content p {
+            opacity: 0.8;
+            line-height: 1.7;
+        }
+
+        /* Next Project */
+        .next-project {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .next-project-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--dark);
+            font-size: 1.25rem;
+            font-weight: 600;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .next-project-link span {
+            margin-right: 0.5rem;
+        }
+
+        .next-project-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--neon);
+            transition: width 0.3s ease;
+        }
+
+        .next-project-link:hover::after {
+            width: 100%;
+        }
+
+        .next-project-link .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .next-project-link:hover .arrow {
+            transform: translateX(6px);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--white);
+            padding: 4rem 0;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .footer-column p, .footer-column a {
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: var(--white);
+            text-decoration: none;
+            transition: opacity 0.3s ease, color 0.3s ease;
+        }
+
+        .footer-column a:hover {
+            opacity: 1;
+            color: var(--neon);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.5;
+            font-size: 0.875rem;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 1rem;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 80%;
+            max-height: 90vh;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -3rem;
+            right: 0;
+            color: var(--white);
+            font-size: 2rem;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 80vh;
+            object-fit: contain;
+        }
+
+        .lightbox-caption {
+            color: var(--white);
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .image-collage {
+                height: 400px;
+                margin-top: 2rem;
+            }
+
+            .collage-image img {
+                height: 350px;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--lavender);
+                flex-direction: column;
+                padding: 1rem 0;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            nav ul li {
+                padding: 0.5rem 2rem;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .process-item {
+                flex-direction: column;
+            }
+
+            .process-item:nth-child(even) {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container header-container">
+            <a href="index.html" class="logo">Mille Bruun Hansen</a>
+            <div class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#skills">Skills</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-grid">
+                    <div class="hero-content">
+                        <h1>
+                            Book Campaign
+                            <span class="title-accent">Print Advertisements</span>
+                        </h1>
+                        <p>
+                            A comprehensive collection of print advertisements for various book campaigns, 
+                            including newspaper tabloids, bus stop posters, and window displays.
+                        </p>
+                        <div class="meta-grid">
+                            <div class="meta-item">
+                                <h4>Client</h4>
+                                <p>Politikens Forlag</p>
+                            </div>
+                            <div class="meta-item">
+                                <h4>Role</h4>
+                                <p>Graphic Designer</p>
+                            </div>
+                            <div class="meta-item">
+                                <h4>Year</h4>
+                                <p>2019-2023</p>
+                            </div>
+                            <div class="meta-item">
+                                <h4>Categories</h4>
+                                <p>Print Design, Advertising</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="image-collage">
+                        <!-- Collage images -->
+                        <div class="collage-image" id="collageImage1">
+                            <img src="/api/placeholder/800/1000" alt="Book campaign sample 1">
+                        </div>
+                        <div class="collage-image" id="collageImage2">
+                            <img src="/api/placeholder/800/1000" alt="Book campaign sample 2">
+                        </div>
+                        <div class="collage-image" id="collageImage3">
+                            <img src="/api/placeholder/800/1000" alt="Book campaign sample 3">
+                        </div>
+                        <div class="collage-image" id="collageImage4">
+                            <img src="/api/placeholder/800/1000" alt="Book campaign sample 4">
+                        </div>
+                        
+                        <!-- Decorative elements -->
+                        <div class="decoration-circle decoration-yellow"></div>
+                        <div class="decoration-circle decoration-white"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white">
+            <div class="container">
+                <h2 class="section-title">Project Overview</h2>
+                <div style="max-width: 800px;">
+                    <p style="font-size: 1.125rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        During my time as a graphic designer at Politikens Forlag, I was responsible for creating impactful print advertisements for various book campaigns. These advertisements were designed to capture attention, convey the essence of each book, and drive interest and sales.
+                    </p>
+                    <p style="font-size: 1.125rem; line-height: 1.7;">
+                        Each campaign presented unique creative challenges, requiring a deep understanding of the book's themes, target audience, and marketing objectives. The advertisements needed to be visually striking while maintaining brand consistency and effectively communicating the book's appeal.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-underline">Newspaper & Magazine Advertisements</span>
+                </h2>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-image="/api/placeholder/800/600" data-caption="The Silent Hour">
+                        <div class="gallery-item-image">
+                            <img src="/api/placeholder/800/600" alt="Newspaper ad for 'The Silent Hour'">
+                        </div>
+                        <div class="gallery-item-content">
+                            <h3>The Silent Hour</h3>
+                            <p>Full-page newspaper advertisement featuring bold typography and minimalist design</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-image="/api/placeholder/800/600" data-caption="Coastal Whispers">
+                        <div class="gallery-item-image">
+                            <img src="/api/placeholder/800/600" alt="Magazine spread for 'Coastal Whispers'">
+                        </div>
+                        <div class="gallery-item-content">
+                            <h3>Coastal Whispers</h3>
+                            <p>Double-page magazine spread with atmospheric imagery and quote highlights</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-image="/api/placeholder/800/600" data-caption="The Aurora Series">
+                        <div class="gallery-item-image">
+                            <img src="/api/placeholder/800/600" alt="Tabloid advertisement for bestseller series">
+                        </div>
+                        <div class="gallery-item-content">
+                            <h3>The Aurora Series</h3>
+                            <p>Tabloid advertisement showcasing the complete bestselling series with special pricing</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white">
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-underline">Transit Advertisements</span>
+                </h2>
+                
+                <div class="gallery-grid">
+                    <div class="gallery-item" data-image="/api/placeholder/800/600" data-caption="Midnight Tales">
+                        <div class="gallery-item-image">
+                            <img src="/api/placeholder/800/600" alt="Bus stop poster for 'Midnight Tales'">
+                        </div>
+                        <div class="gallery-item-content">
+                            <h3>Midnight Tales</h3>
+                            <p>Bus stop poster designed for high visibility and instant recognition</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-image="/api/placeholder/800/600" data-caption="The Last Letter">
+                        <div class="gallery-item-image">
+                            <img src="/api/placeholder/800/600" alt="Bus side advertisement for 'The Last Letter'">
+                        </div>
+                        <div class="gallery-item-content">
+                            <h3>The Last Letter</h3>
+                            <p>Bus side advertisement designed for impact while in motion</p>
+                        </div>
+                    </div>
+                    <div class="gallery-item" data-image="/api/placeholder/800/600" data-caption="Beyond the Horizon">
+                        <div class="gallery-item-image">
+                            <img src="/api/placeholder/800/600" alt="Train station billboard for 'Beyond the Horizon'">
+                        </div>
+                        <div class="gallery-item-content">
+                            <h3>Beyond the Horizon</h3>
+                            <p>Large format train station billboard with dynamic visual elements</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <h2 class="section-title">
+                    <span class="title-underline">Design Process</span>
+                </h2>
+                
+                <div style="max-width: 1000px; margin: 0 auto;">
+                    <div class="process-item">
+                        <div class="process-image">
+                            <div class="process-decoration process-decoration-1"></div>
+                            <img src="/api/placeholder/800/600" alt="Research and concept development">
+                        </div>
+                        <div class="process-content">
+                            <span class="process-number">01</span>
+                            <h3>Research & Concept Development</h3>
+                            <p>
+                                Each campaign began with thorough research into the book's content, target audience, and market positioning. 
+                                Working closely with editors and marketing teams, I developed concepts that would effectively communicate 
+                                the book's unique selling points.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-item">
+                        <div class="process-image">
+                            <div class="process-decoration process-decoration-2"></div>
+                            <img src="/api/placeholder/800/600" alt="Format adaptation">
+                        </div>
+                        <div class="process-content">
+                            <span class="process-number">02</span>
+                            <h3>Format Adaptation</h3>
+                            <p>
+                                One of the key challenges was adapting designs across multiple formats while maintaining visual coherence. 
+                                This required careful consideration of visual hierarchy, readability at different scales, and the viewing context 
+                                of each medium.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="process-item">
+                        <div class="process-image">
+                            <div class="process-decoration process-decoration-1"></div>
+                            <img src="/api/placeholder/800/600" alt="Mockup and review">
+                        </div>
+                        <div class="process-content">
+                            <span class="process-number">03</span>
+                            <h3>Mockup & Review</h3>
+                            <p>
+                                Creating realistic mockups was essential for client approval and to visualize how designs would appear in their intended environments. 
+                                This process often led to refinements that improved visibility, impact, and message clarity.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="next-project bg-white">
+            <div class="container">
+                <a href="#" class="next-project-link">
+                    <span>Next Project: Book Launch Event Materials</span>
+                    <span class="arrow">→</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>Mille Bruun Hansen</h3>
+                    <p>Graphic Designer specializing in print and digital media</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <p>millebruun@yahoo.dk</p>
+                    <p>+45 53 60 40 11</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#skills">Skills</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Social</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-behance"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Mille Bruun Hansen. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-image" id="lightboxImage">
+            <div class="lightbox-caption" id="lightboxCaption"></div>
+        </div>
+    </div>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 20) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+
+        // Lightbox functionality
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const imageSrc = this.getAttribute('data-image');
+                const caption = this.getAttribute('data-caption');
+                
+                lightboxImage.src = imageSrc;
+                lightboxCaption.textContent = caption;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        lightboxClose.addEventListener('click', function() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Image collage rotation
+        const collageImages = [
+            document.getElementById('collageImage1'),
+            document.getElementById('collageImage2'),
+            document.getElementById('collageImage3'),
+            document.getElementById('collageImage4')
+        ];
+        
+        let activeImageIndex = 0;
+        collageImages[activeImageIndex].classList.add('active');
+        
+        function rotateCollageImages() {
+            collageImages[activeImageIndex].classList.remove('active');
+            activeImageIndex = (activeImageIndex + 1) % collageImages.length;
+            collageImages[activeImageIndex].classList.add('active');
+        }
+        
+        setInterval(rotateCollageImages, 3000);
+
+        // Initialize the first image
+        collageImages[0].classList.add('active');
+    </script>
+</body>
+</html>
