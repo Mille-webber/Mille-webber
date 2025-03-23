@@ -6,12 +6,17 @@
     <title>Book Campaign Print Ads | Mille Bruun Hansen</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <!-- Import The Artist font -->
+    <link href="https://fonts.cdnfonts.com/css/the-artist" rel="stylesheet">
     <style>
         :root {
-            --lavender: #EDE4FF;
-            --dark: #212121;
-            --neon: #d5fe00;
-            --white: #ffffff;
+            /* Color palette */
+            --cobalt: #021e38;      /* Text and dramatic background */
+            --cream: #fafdfa;       /* Primary background */
+            --toasted: #e8d5be;     /* Secondary background */
+            --mist: #d2dddc;        /* Tertiary background */
+            --field: #b2a418;       /* Stylized text and cool elements */
+            --mandarin: #ed943f;    /* CTA and buttons */
         }
 
         * {
@@ -22,8 +27,8 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--lavender);
-            color: var(--dark);
+            background-color: var(--cream);
+            color: var(--cobalt);
             line-height: 1.6;
             overflow-x: hidden;
         }
@@ -32,6 +37,12 @@
             max-width: 1400px;
             margin: 0 auto;
             padding: 0 2rem;
+        }
+
+        /* Typography */
+        .artist-font {
+            font-family: 'The Artist', sans-serif;
+            font-weight: normal;
         }
 
         /* Utilities */
@@ -52,13 +63,13 @@
             top: 0;
             z-index: 1000;
             padding: 1rem 0;
-            background-color: #ffffff;
+            background-color: var(--cream);
             transition: all 0.3s ease;
         }
 
         header.scrolled {
             padding: 0.5rem 0;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(2, 30, 56, 0.1);
         }
 
         .header-container {
@@ -69,14 +80,14 @@
 
         .logo {
             font-size: 1.5rem;
-            color: var(--dark);
+            color: var(--cobalt);
             text-decoration: none;
             font-weight: bold;
             letter-spacing: -0.5px;
         }
 
         .logo:hover {
-            color: var(--neon);
+            color: var(--field);
         }
 
         nav ul {
@@ -86,14 +97,14 @@
         }
 
         nav a {
-            color: var(--dark);
+            color: var(--cobalt);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s ease;
         }
 
         nav a:hover {
-            color: var(--neon);
+            color: var(--field);
         }
 
         .menu-toggle {
@@ -106,6 +117,7 @@
         .hero {
             padding-top: 8rem;
             padding-bottom: 5rem;
+            background-color: var(--mist);
         }
 
         .hero-grid {
@@ -120,13 +132,16 @@
             line-height: 1.1;
             font-weight: 300;
             margin-bottom: 1.5rem;
+            color: var(--cobalt);
         }
 
         .title-accent {
             display: block;
-            font-weight: 700;
-            color: var(--neon);
+            font-weight: normal;
+            color: var(--field);
             margin-top: 0.5rem;
+            font-size: 3.8rem;
+            letter-spacing: 1px;
         }
 
         .hero-content p {
@@ -208,7 +223,7 @@
             height: 100%;
             object-fit: cover;
             border-radius: 4px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 30px rgba(2, 30, 56, 0.1);
         }
 
         /* Left column images - slightly offset upward */
@@ -229,51 +244,21 @@
             transform: translateY(10px) scale(1);
         }
 
-        /* Decorative elements */
-        .decoration-circle {
-            position: absolute;
-            z-index: 1;
-        }
-
-        .decoration-yellow {
-            top: 1.5rem;
-            right: 3rem;
-            width: 6rem;
-            height: 6rem;
-            background-color: var(--neon);
-            border-radius: 50%;
-            opacity: 0.5;
-        }
-
-        .decoration-white {
-            bottom: 3rem;
-            left: 1rem;
-            width: 8rem;
-            height: 8rem;
-            background-color: var(--white);
-            border-radius: 50%;
-            opacity: 0.3;
-        }
-
-        .decoration-dot-grid {
-            position: absolute;
-            bottom: -20px;
-            right: -30px;
-            width: 80px;
-            height: 80px;
-            background-image: radial-gradient(var(--dark) 2px, transparent 2px);
-            background-size: 10px 10px;
-            opacity: 0.2;
-            z-index: 0;
-        }
-
         /* Section Styles */
         section {
             padding: 5rem 0;
         }
 
-        section.bg-white {
-            background-color: var(--white);
+        section.bg-cream {
+            background-color: var(--cream);
+        }
+
+        section.bg-toasted {
+            background-color: var(--toasted);
+        }
+
+        section.bg-mist {
+            background-color: var(--mist);
         }
 
         .section-title {
@@ -282,6 +267,7 @@
             margin-bottom: 3rem;
             display: inline-block;
             position: relative;
+            color: var(--cobalt);
         }
 
         .section-title::after {
@@ -290,25 +276,8 @@
             bottom: -0.5rem;
             left: 0;
             width: 33%;
-            height: 4px;
-            background-color: var(--neon);
-        }
-
-        .title-underline {
-            position: relative;
-            z-index: 1;
-        }
-
-        .title-underline::after {
-            content: '';
-            position: absolute;
-            bottom: -0.5rem;
-            left: 0;
-            width: 100%;
-            height: 1rem;
-            background-color: var(--neon);
-            opacity: 0.3;
-            z-index: -1;
+            height: 2px;
+            background-color: var(--field);
         }
 
         /* Gallery Grid */
@@ -319,26 +288,27 @@
         }
 
         .gallery-item {
-            background-color: var(--white);
+            background-color: var(--cream);
             border-radius: 4px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 5px 15px rgba(2, 30, 56, 0.05);
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .gallery-item:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(2, 30, 56, 0.1);
         }
 
         .gallery-item-image {
             overflow: hidden;
+            height: 16rem;
         }
 
         .gallery-item-image img {
             width: 100%;
-            height: 16rem;
+            height: 100%;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
@@ -355,6 +325,7 @@
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 0.5rem;
+            color: var(--cobalt);
         }
 
         .gallery-item-content p {
@@ -393,30 +364,11 @@
             }
         }
 
-        .process-decoration {
-            position: absolute;
-            width: 3rem;
-            height: 3rem;
-            background-color: var(--neon);
-            opacity: 0.5;
-            z-index: 0;
-        }
-
-        .process-decoration-1 {
-            top: -0.5rem;
-            left: -0.5rem;
-        }
-
-        .process-decoration-2 {
-            bottom: -0.5rem;
-            right: -0.5rem;
-        }
-
         .process-image img {
             width: 100%;
             height: auto;
             border-radius: 4px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(2, 30, 56, 0.1);
             position: relative;
             z-index: 1;
         }
@@ -427,8 +379,8 @@
 
         .process-number {
             display: inline-block;
-            background-color: var(--neon);
-            color: var(--dark);
+            background-color: var(--field);
+            color: var(--cream);
             font-size: 0.75rem;
             font-weight: 600;
             padding: 0.25rem 1rem;
@@ -437,9 +389,9 @@
         }
 
         .process-content h3 {
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.75rem;
             margin-bottom: 1rem;
+            color: var(--cobalt);
         }
 
         .process-content p {
@@ -456,7 +408,7 @@
         .next-project-link {
             display: inline-flex;
             align-items: center;
-            color: var(--dark);
+            color: var(--cobalt);
             font-size: 1.25rem;
             font-weight: 600;
             text-decoration: none;
@@ -474,7 +426,7 @@
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--neon);
+            background-color: var(--field);
             transition: width 0.3s ease;
         }
 
@@ -490,10 +442,41 @@
             transform: translateX(6px);
         }
 
+        /* Button Styles */
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background-color: var(--mandarin);
+            color: var(--cream);
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #d67f2c;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(237, 148, 63, 0.3);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--mandarin);
+            color: var(--mandarin);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--mandarin);
+            color: var(--cream);
+        }
+
         /* Footer */
         footer {
-            background-color: var(--dark);
-            color: var(--white);
+            background-color: var(--cobalt);
+            color: var(--cream);
             padding: 4rem 0;
         }
 
@@ -507,20 +490,21 @@
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 1rem;
+            color: var(--cream);
         }
 
         .footer-column p, .footer-column a {
             opacity: 0.7;
             margin-bottom: 0.5rem;
             display: block;
-            color: var(--white);
+            color: var(--cream);
             text-decoration: none;
             transition: opacity 0.3s ease, color 0.3s ease;
         }
 
         .footer-column a:hover {
             opacity: 1;
-            color: var(--neon);
+            color: var(--mandarin);
         }
 
         .footer-links {
@@ -544,7 +528,7 @@
             text-align: center;
             padding-top: 2rem;
             margin-top: 3rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid rgba(250, 253, 250, 0.1);
             opacity: 0.5;
             font-size: 0.875rem;
         }
@@ -556,7 +540,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
+            background-color: rgba(2, 30, 56, 0.9);
             display: none;
             justify-content: center;
             align-items: center;
@@ -578,7 +562,7 @@
             position: absolute;
             top: -3rem;
             right: 0;
-            color: var(--white);
+            color: var(--cream);
             font-size: 2rem;
             cursor: pointer;
             background: none;
@@ -592,9 +576,21 @@
         }
 
         .lightbox-caption {
-            color: var(--white);
+            color: var(--cream);
             text-align: center;
             margin-top: 1rem;
+        }
+
+        /* CTA section */
+        .cta-section {
+            text-align: center;
+            padding: 5rem 0;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--cobalt);
         }
 
         /* Responsive */
@@ -605,6 +601,10 @@
 
             .hero-content h1 {
                 font-size: 2.5rem;
+            }
+
+            .title-accent {
+                font-size: 3rem;
             }
 
             .image-collage {
@@ -635,10 +635,10 @@
                 top: 100%;
                 left: 0;
                 width: 100%;
-                background-color: var(--lavender);
+                background-color: var(--cream);
                 flex-direction: column;
                 padding: 1rem 0;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                box-shadow: 0 10px 20px rgba(2, 30, 56, 0.1);
             }
 
             nav ul.active {
@@ -688,7 +688,7 @@
                     <div class="hero-content">
                         <h1>
                             Book Campaign
-                            <span class="title-accent">Print Advertisements</span>
+                            <span class="title-accent artist-font">Print Advertisements</span>
                         </h1>
                         <p>
                             A comprehensive collection of print advertisements for various book campaigns, 
@@ -719,35 +719,30 @@
                                 <!-- Left column images -->
                                 <div class="collage-column">
                                     <div class="collage-image" id="leftImage1">
-                                        <img src="Frame1.png">
+                                        <img src="/api/placeholder/600/750" alt="Book campaign sample 1">
                                     </div>
                                     <div class="collage-image" id="leftImage2">
-                                        <img src="Frame2.png" alt="Book campaign sample 2">
+                                        <img src="/api/placeholder/600/750" alt="Book campaign sample 2">
                                     </div>
                                 </div>
                                 
                                 <!-- Right column images -->
                                 <div class="collage-column">
                                     <div class="collage-image" id="rightImage1">
-                                        <img src="Frame2.png" alt="Book campaign sample 3">
+                                        <img src="/api/placeholder/600/750" alt="Book campaign sample 3">
                                     </div>
                                     <div class="collage-image" id="rightImage2">
-                                        <img src="Frame1.png" alt="Book campaign sample 4">
+                                        <img src="/api/placeholder/600/750" alt="Book campaign sample 4">
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- Decorative elements -->
-                            <div class="decoration-circle decoration-yellow"></div>
-                            <div class="decoration-circle decoration-white"></div>
-                            <div class="decoration-dot-grid"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="bg-white">
+        <section class="bg-toasted">
             <div class="container">
                 <h2 class="section-title">Project Overview</h2>
                 <div style="max-width: 800px;">
@@ -761,10 +756,10 @@
             </div>
         </section>
 
-        <section>
+        <section class="bg-cream">
             <div class="container">
-                <h2 class="section-title">
-                    <span class="title-underline">Newspaper & Magazine Advertisements</span>
+                <h2 class="section-title artist-font" style="font-size: 2.5rem; font-weight: normal;">
+                    Newspaper & Magazine Advertisements
                 </h2>
                 
                 <div class="gallery-grid">
@@ -779,7 +774,7 @@
                     </div>
                     <div class="gallery-item" data-image="/api/placeholder/800/600" data-caption="Coastal Whispers">
                         <div class="gallery-item-image">
-                            <img src="Frame1.png" alt="Magazine spread for 'Coastal Whispers'">
+                            <img src="/api/placeholder/800/600" alt="Magazine spread for 'Coastal Whispers'">
                         </div>
                         <div class="gallery-item-content">
                             <h3>Coastal Whispers</h3>
@@ -788,7 +783,7 @@
                     </div>
                     <div class="gallery-item" data-image="/api/placeholder/800/600" data-caption="The Aurora Series">
                         <div class="gallery-item-image">
-                            <img src="Frame2.png" alt="Tabloid advertisement for bestseller series">
+                            <img src="/api/placeholder/800/600" alt="Tabloid advertisement for bestseller series">
                         </div>
                         <div class="gallery-item-content">
                             <h3>The Aurora Series</h3>
@@ -799,10 +794,10 @@
             </div>
         </section>
 
-        <section class="bg-white">
+        <section class="bg-mist">
             <div class="container">
-                <h2 class="section-title">
-                    <span class="title-underline">Transit Advertisements</span>
+                <h2 class="section-title artist-font" style="font-size: 2.5rem; font-weight: normal;">
+                    Transit Advertisements
                 </h2>
                 
                 <div class="gallery-grid">
@@ -837,21 +832,20 @@
             </div>
         </section>
 
-        <section>
+        <section class="bg-cream">
             <div class="container">
-                <h2 class="section-title">
-                    <span class="title-underline">Design Process</span>
+                <h2 class="section-title artist-font" style="font-size: 2.5rem; font-weight: normal;">
+                    Design Process
                 </h2>
                 
                 <div style="max-width: 1000px; margin: 0 auto;">
                     <div class="process-item">
                         <div class="process-image">
-                            <div class="process-decoration process-decoration-1"></div>
                             <img src="/api/placeholder/800/600" alt="Research and concept development">
                         </div>
                         <div class="process-content">
                             <span class="process-number">01</span>
-                            <h3>Research & Concept Development</h3>
+                            <h3 class="artist-font">Research & Concept Development</h3>
                             <p>
                                 Each campaign began with thorough research into the book's content, target audience, and market positioning. 
                                 Working closely with editors and marketing teams, I developed concepts that would effectively communicate 
@@ -862,12 +856,11 @@
                     
                     <div class="process-item">
                         <div class="process-image">
-                            <div class="process-decoration process-decoration-2"></div>
                             <img src="/api/placeholder/800/600" alt="Format adaptation">
                         </div>
                         <div class="process-content">
                             <span class="process-number">02</span>
-                            <h3>Format Adaptation</h3>
+                            <h3 class="artist-font">Format Adaptation</h3>
                             <p>
                                 One of the key challenges was adapting designs across multiple formats while maintaining visual coherence. 
                                 This required careful consideration of visual hierarchy, readability at different scales, and the viewing context 
@@ -878,12 +871,11 @@
                     
                     <div class="process-item">
                         <div class="process-image">
-                            <div class="process-decoration process-decoration-1"></div>
-                            <img src="Frame1.png" alt="Mockup and review">
+                            <img src="/api/placeholder/800/600" alt="Mockup and review">
                         </div>
                         <div class="process-content">
                             <span class="process-number">03</span>
-                            <h3>Mockup & Review</h3>
+                            <h3 class="artist-font">Mockup & Review</h3>
                             <p>
                                 Creating realistic mockups was essential for client approval and to visualize how designs would appear in their intended environments. 
                                 This process often led to refinements that improved visibility, impact, and message clarity.
@@ -894,12 +886,22 @@
             </div>
         </section>
 
-        <section class="next-project bg-white">
+        <section class="next-project bg-toasted">
             <div class="container">
                 <a href="#" class="next-project-link">
                     <span>Next Project: Book Launch Event Materials</span>
                     <span class="arrow">→</span>
                 </a>
+            </div>
+        </section>
+
+        <section class="cta-section bg-mist">
+            <div class="container">
+                <h2 class="cta-title artist-font">Ready to collaborate?</h2>
+                <p style="max-width: 600px; margin: 0 auto 2rem; font-size: 1.125rem;">
+                    Let's work together to create impactful designs that communicate your brand's message effectively.
+                </p>
+                <a href="#contact" class="btn">Get in Touch</a>
             </div>
         </section>
     </main>
@@ -908,7 +910,7 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-column">
-                    <h3>Mille Bruun Hansen</h3>
+                    <h3 class="artist-font" style="font-size: 1.5rem;">Mille Bruun Hansen</h3>
                     <p>Graphic Designer specializing in print and digital media</p>
                 </div>
                 <div class="footer-column">
