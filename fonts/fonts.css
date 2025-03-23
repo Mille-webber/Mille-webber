@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'The Artist';
-    src: url('fonts/TheArtist Sans.otf') format('woff2'),
-         url('fonts/TheArtist Script Extras.otf') format('woff'),
+    src: url('fonts/TheArtist Script.otf') format('woff2'),
+         url('fonts/TheArtist Script.otf') format('woff'),
          url('fonts/TheArtist Script.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
